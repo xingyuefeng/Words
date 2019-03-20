@@ -1,52 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {StyleSheet, View, Dimensions, StatusBar} from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-import { Icon, Text, Input, Button } from 'react-native-elements'
+import { Text } from 'react-native-elements'
+import LoginTab from './comp/loginTab';
+import RegisterTab from './comp/registerTab';
+
+import { request } from  '../../utils';
 
 
-const FirstRoute = () => (
-  <View style={styles.inputBox}>
-      <Input
-        placeholder='用户名'
-        inputStyle={{marginTop: 25, fontSize: 16, color: '#25242C'}}
-        leftIcon={
-          <Icon
-            name='person'
-            size={24}
-            color='#35343D'
-            shake={true}
-            iconStyle={{marginTop: 18, marginRight: 8}}
-          />
-        }
-      />
-      <Input
-        placeholder='密码'
-        inputStyle={{marginTop: 15, fontSize: 16, color: '#25242C'}}
-        leftIcon={
-          <Icon
-            name='lock'
-            size={24}
-            color='#35343D'
-            iconStyle={{marginTop: 10, marginRight: 8}}
-          />
-        }
-      />
-      <Button
-        title="登录"
-        buttonStyle={{marginTop: 40, width: Dimensions.get('window').width - 50, borderRadius: 20, backgroundColor: '#00CA9D' }}
-        titleStyle={{fontSize: 16}}
-      />
-  </View>
-);
-const SecondRoute = () => (
-  <View style={[styles.scene]}>
-    <Text>3123123123123123123123123</Text>
-  </View>
-);
+
 
 
 export default function Login(props) {
-  const [tabIndex, changeTabIndex] = useState(0)
+  const [tabIndex, changeTabIndex] = useState(0);
+  useEffect(() => {
+  });
+
   return (
     <View style={{ flex: 1 }} >
       <Text style={styles.title} h4>欢迎来到背背词😊😊😊</Text>
@@ -60,8 +29,8 @@ export default function Login(props) {
           ],
         }}
         renderScene={SceneMap({
-          first: FirstRoute,
-          second: SecondRoute,
+          first: LoginTab,
+          second: RegisterTab,
         })}
         onIndexChange={(index) => {changeTabIndex(index)}}
         style={styles.tabView}
