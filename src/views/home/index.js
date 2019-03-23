@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, StatusBar} from 'react-native';
 import { Button } from 'react-native-elements';
+import { SafeAreaView } from 'react-navigation';
 
 export default function Home(props) {
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text>
         home
       </Text>
@@ -18,7 +19,7 @@ export default function Home(props) {
         onPress={() => props.navigation.navigate('Login')}
         buttonStyle={{ marginTop: 20 }}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
 
 Home.navigationOptions = ({ navigation }) => {
   return {
-    title: 'home',
+    title: '首页',
     initialRouteName: 'Home',
     headerStyle: {
       backgroundColor: 'pink',

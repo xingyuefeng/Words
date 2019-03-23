@@ -28,17 +28,24 @@ export default function Login(props) {
             { key: 'second', title: '注册' },
           ],
         }}
-        renderScene={SceneMap({
-          first: LoginTab,
-          second: RegisterTab,
-        })}
+        // renderScene={SceneMap({
+        //   first: LoginTab,
+        //   second: RegisterTab,
+        // })}
+        renderScene={({ route, jumpto }) => {
+          switch (route.key) {
+            case 'first':
+              return <LoginTab navigation={props.navigation} />
+            case 'second':
+              return <RegisterTab navigation={props.navigation} />
+          }
+        }}
         onIndexChange={(index) => {changeTabIndex(index)}}
         style={styles.tabView}
         initialLayout={{ width: Dimensions.get('window').width }}
         renderTabBar={(barProps) => (
           <TabBar
             {...barProps}
-            indicatorStyle={{ backgroundColor: '#00CA9D', color: 'red'  }}
             style={{ backgroundColor: 'transparent'}}
             inactiveColor="#35343D"
             activeColor="#00CA9D"
