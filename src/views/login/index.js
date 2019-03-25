@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import {StyleSheet, View, Dimensions, StatusBar} from 'react-native';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { TabView, TabBar } from 'react-native-tab-view';
 import { Text } from 'react-native-elements'
 import LoginTab from './comp/loginTab';
 import RegisterTab from './comp/registerTab';
 
-import { request } from  '../../utils';
-
-
-
-
 
 export default function Login(props) {
   const [tabIndex, changeTabIndex] = useState(0);
-  useEffect(() => {
-  });
 
   return (
     <View style={{ flex: 1 }} >

@@ -23,8 +23,9 @@ import Center from '../views/center';
 
 
 const TabNavigator = createBottomTabNavigator({
-  Home,
+
   Add,
+  Home,
   Center
   // Home: {
   // screen: Home,
