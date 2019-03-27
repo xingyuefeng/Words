@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
 Center.navigationOptions = ({ navigation }) => {
   return {
     title: '我的',
+    hideTitle: true,
     initialRouteName: 'Center',
     headerStyle: {
       backgroundColor: 'skyblue',

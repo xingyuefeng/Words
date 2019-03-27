@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 Home.navigationOptions = ({ navigation }) => {
   return {
     title: '首页',
+    hideTitle: true,
     initialRouteName: 'Home',
     headerStyle: {
       backgroundColor: 'pink',

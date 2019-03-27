@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { StyleSheet, Text, View, Alert, FlatList } from 'react-native';
+import { Icon, Input, Button } from 'react-native-elements'
 
-let ceshi = () => {};
 
 export default class Add extends React.Component {
 
@@ -11,6 +10,7 @@ export default class Add extends React.Component {
     const params = navigation.state.params || {};
     return {
       title: '记录',
+      hideTitle: true,
       initialRouteName: 'Add',
       headerStyle: {
         backgroundColor: 'skyblue',
@@ -28,7 +28,8 @@ export default class Add extends React.Component {
       ),
       headerRight: (
         <Button
-          onPress={params.ceshi}
+          // onPress={params.ceshi}
+          type="clear"
           title="保存"
           color="skyblue"
         />
@@ -36,35 +37,61 @@ export default class Add extends React.Component {
     };
   };
 
-  componentDidMount() {
-    this.props.navigation.setParams({ ceshi: this._ceshi });
+  state = {
+    inputData: [],
+    loading: false,
+    contents: [],
   }
 
-  _ceshi = () => {
-      Alert.alert(
-        'Alert Title',
-        'My Alert Msg',
-        [
-          {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: false }
-      )
+  componentDidMount() {
+    // this.props.navigation.setParams({ ceshi: this._ceshi });
+
+    // props.navigation.navigate('Home')
+    const inputData = []
+    for(let i = 0; i < 100; i++ ) {
+      inputData.push({
+        key: i + '',
+        el: <View style={styles.inputItem} >
+          {/* key={`${i}-left`} */}
+          <Input onChangeText={(text) => this.handleChange(text, i, 'content')} containerStyle={styles.input} placeholder='输入单词' />
+          <Input onChangeText={(text) => this.handleChange(text, i, 'remark')} containerStyle={styles.input} placeholder='输入词义' />
+        </View>
+      })
     }
+    this.setState({inputData})
+  }
+  handleChange = (text, idx, type) => {
+    const contents = this.state.contents.concat();
+    console.log('contents[idx]=====>', contents[idx])
+    if (contents[idx]) {
+      console.log(123)
+      contents[idx][type] = text
+    } else {
+      contents[idx] = {[type]: text}
+      // contents[idx][type] = text
+    }
+    // contents[idx][type] = text;
+    this.setState({contents})
+    console.log(contents);
+  }
 
   render() {
+    const { inputData, loading } = this.state;
+    // console.log(this.state.contents);
     return (
       <View style={styles.container}>
-         <Button
-          title="返回首页"
-          color="#841584"
-          onPress={() => props.navigation.navigate('Home')}
-        />
-         <Button
-          title="返回首页11111"
-          color="#841584"
-          onPress={this.ceshi}
+        {
+          loading &&
+          <Button
+            style={styles.btnLoding}
+            type="clear"
+            loading={ loading }
+          />
+        }
+        <FlatList
+          data={inputData}
+          renderItem={({item}) => item.el}
+          keyExtractor={item => item.key}
         />
       </View>
     )
@@ -73,9 +100,26 @@ export default class Add extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'skyblue',
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
+  inputItem: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+ 
+  },
+  input: {
+    flex:1,
+    marginBottom: 10,
+    // width: 50,
+  },
+  inputStyle: {
+    fontSize: 15,
+    color: '#25242C'
+  },
+  btnLoding: {
+    
+  }
 });

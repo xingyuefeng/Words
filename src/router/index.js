@@ -98,7 +98,7 @@ const TabNavigator = createBottomTabNavigator({
 TabNavigator.navigationOptions = ({navigation, screenProps}) => {
   const childOptions = getActiveChildNavigationOptions(navigation, screenProps)
   return {
-    // title: childOptions.title,
+    title: !childOptions.hideTitle && childOptions.title,
     headerLeft : childOptions.headerLeft,
     headerRight: childOptions.headerRight,
     headerStyle: {
